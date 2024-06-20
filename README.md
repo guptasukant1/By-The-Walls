@@ -12,4 +12,4 @@
 
 
 
-### Find a way to host files rather than storing in repo itself. MongoDB uploads can be considered, but find ORM solution for this
+### Find a way to host files rather than storing in repo itself. MongoDB uploads can be considered, but find ORM/ORD solution for this
