@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="upload" class="py-5">
+        <div class="container">
+            <h2 class="text-center">Upload Your Wallpaper</h2>
+            <form id="uploadForm" class="text-center" action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="wallpaper" class="form-label">Choose a wallpaper to upload:</label>
+                    <input type="file" class="form-control" id="wallpaper" name="wallpaper" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+            <div id="confirmation" class="mt-4" style="display: none;">
+                <h3 class="text-center text-success">Image uploaded successfully!</h3>
+                <img id="uploadedImage" src="" class="img-fluid mt-3" alt="Uploaded Image">
+            </div>
+        </div>
+    </section>
+</body>
+</html>

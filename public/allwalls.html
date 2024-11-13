@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Wallpapers</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="./index.html">By The Walls</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./walls.html">Wallpapers</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="uploaded-wallpapers" class="py-5">
+        <div class="container-fluid px-5">
+            <h2 class="text-center">Uploaded Wallpapers</h2>
+            <div id="wallpapersContainer" class="row">
+                <!-- Images will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        async function fetchWallpapers() {
+            try {
+                const response = await fetch('/images');
+    
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+    
+                const images = await response.json();
+    
+                const wallpapersContainer = document.getElementById('wallpapersContainer');
+                wallpapersContainer.innerHTML = ''; // Clear existing content
+    
+                images.forEach(image => {
+                    const colDiv = document.createElement('div');
+                    colDiv.className = 'col-3 mb-5';
+    
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `/uploads/${image.filename}`;
+                    imgElement.className = 'img-fluid rounded';
+    
+                    colDiv.appendChild(imgElement);
+                    wallpapersContainer.appendChild(colDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching wallpapers:', error);
+                const responseText = await response.text();
+                console.error('Response text:', responseText);
+            }
+        }
+    
+        // Fetch wallpapers when the page loads
+        document.addEventListener('DOMContentLoaded', fetchWallpapers);
+    </script>
+    
+</body>
+</html>
